@@ -28,3 +28,9 @@ author:
 version:             1.0.0
 github:
   repo:              https://github.com/yankovai/
+
+# List of pages to include in header of website
+pages_list:       
+  About: '/about'
+  Archive: '/archive'
+  Feed: '/atom.xml'
