@@ -11,9 +11,9 @@ Before my job at Zillow I was a PhD student at the University of Michigan where 
 
 Before deciding to get a PhD I attended the Rose-Hulman Institute of Technology in the quaint town of Terre Haute, Indiana. At Rose I participated in Operation Catapult, Fast Track Calculus and gained an appreciation for a prank. In fact, one time I played a prank with Peyton Manning and a few other members of the Indianapolis Colts. All I'll say is the prank involved a golf cart, a lake, and a bunch of super nerdy "Fast Track Calculus" students fresh out of high school. 
 
-Intertwined in these years I met my wife at a Research Experience for Undergraduates program at Brigham Young University (neither of us are Mormon) and saw [Cherenkov radiation](http://en.wikipedia.org/wiki/Cherenkov_radiation) during an internship at Idaho National Laboratory in Idaho Falls. To this day, I reckon I had the best burrito of my life in Idaho Falls and yes, it did contain potatoes.
+Intertwined in these years I met my wife at a Research Experience for Undergraduates program at Brigham Young University (neither of us is Mormon) and saw [Cherenkov radiation](http://en.wikipedia.org/wiki/Cherenkov_radiation) during an internship at Idaho National Laboratory in Idaho Falls. To this day, I reckon I had the best burrito of my life in Idaho Falls and yes, it did contain potatoes.
 
 I'd like to use this blog for:
 
 * Teaching some data science tidbits I picked up
-* Rambling about other topics that I'm passionate about
+* Rambling about other topics I'm passionate about
