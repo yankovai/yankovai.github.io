@@ -5,7 +5,7 @@ title: About
 
 ![Artem and someone else's dog at Alki Beach, Seattle.](/assets/artem_jasper_2015_AlkiBeach.JPG)
 
-I like simplicity and elegance in almost every aspect of life, food being the only exception. I'm currently a data scientist in Seattle at [Zillow](http://www.zillow.com) and am very passionate about the algorithms and tools involved in my trade. However, as someone pointed out (I don't remember who) it's a little upsetting that some of the smartest people of my generation are concentrating their mental efforts on how to make more people click on banner ads. 
+I like simplicity and elegance in almost every aspect of life, food being the only exception. I'm currently a data scientist in Seattle at [Zillow](http://www.zillow.com) and am very passionate about the algorithms and tools involved in my trade. However, as someone pointed out (I don't remember who) it's a little upsetting that my generation is concentrating their mental efforts on how to make more people click on banner ads. 
 
 Before my job at Zillow I was a PhD student at the University of Michigan where I wrote a [blog](http://www.rackham.umich.edu/blog/16) occasionally. One blog I wrote was about my experience going to a dozen or so espresso joints in Ann Arbor on a single day. On that day I learned a valuable lesson about moderation. The blogs were a lot more fun to write than my PhD, which was about constructing surrogate models for expensive computer codes and can be found [here](https://github.com/yankovai/Thesis). 
 
