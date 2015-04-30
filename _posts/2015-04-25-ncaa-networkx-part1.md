@@ -8,20 +8,22 @@ The 2015 NCAA basketball tournament is long over but who cares? Let's face it, u
 Let's assume all you know about college basketball is that it consists of these things called games where two different teams play each other. Also, you know there is a college basketball season consisting of a whole schedule of these games. We need some data. Fortunately some guy has [already compiled](https://www.spreadsheet-sports.com/2015-ncaa-basketball-game-data) all the games during the 2015 college basketball season in an easily digestible format. I am forever grateful to the person who owns that page, and would very much like to high-five him, since now I don't have to build a scraper to extract the schedule from [Sports Reference](http://www.sports-reference.com/cbb/). We're going to mine the college basketball schedule to see if we can learn anything about college basketball that we didn't already know. To achieve this monumental task we'll use Python of course, and the [NetworkX](https://networkx.github.io) library, which in my opinion is a brilliant piece of work for network graph analysis. 
 
 To start our analysis let's import everything we'll need:
-```python
+{% highlight python %}
 import pandas as pd
 import numpy as np
 import networkx as nx
 import matplotlib.pylab as plt
 from scipy.stats import gaussian_kde
-```
+{% endhighlight %}
+
+
 
 
 
 what we're modeling (teams as nodes and if team A plays team B then we'll draw an edge between team A and team B. If team A plays team B more than once, we'll take this information into account by adding weight to the edge.)
 the data
  
-<table border="1" class="dataframe">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
