@@ -43,7 +43,7 @@ for team in df.Team.unique():
             dod[team][opponent] = {'weight': 1}
 {% endhighlight %}
 
-The weight key between two teams in this case corresponds to the number of times the two teams played each other. However, in a lot of network graph problems, like finding the shortest distance between any two nodes, a larger weight implies a longer distance to traverse. Let's stop and think what it might mean to travel from node "Michigan" to node "Princeton". Perhaps Michigan is going to face off against Princeton and wants to get the inside scoop on how to beat the mighty Tigers by watching game tape. Well, Michigan played Syracuse once who played Cornell one who played Princeton twice. That's a total of 4 matches to watch. We also know that Michigan played Illinois 3 times who played Brown once who played Princeton twice for a total of 6 matches to watch. We want the "shortest" path from Team A to team B to be the one that has the most matches played. The inverse of edge weight will give us the desired behavior. We add the inverse weight as an edge attribute to the dictionary of dictionaries object:
+The weight key between two teams in this case corresponds to the number of times the two teams played each other. However, in a lot of network graph problems, like finding the shortest distance between any two nodes, a larger weight implies a longer distance to traverse. Let's stop and think what it might mean to travel from node "Michigan" to node "Princeton". Perhaps Michigan is going to face off against Princeton and wants to get the inside scoop on how to beat the mighty Tigers by watching game tape. Well, Michigan played Syracuse once who played Cornell once who played Princeton twice. That's a total of 4 matches to watch. We also know that Michigan played Illinois 3 times who played Brown once who played Princeton twice for a total of 6 matches to watch. We want the "shortest" path from Team A to team B to be the one that has the most matches played. The inverse of edge weight will give us the desired behavior. We add the inverse weight as an edge attribute to the dictionary of dictionaries object:
 
 {% highlight python %}            
 # Calculate inverse weight for distance measures
@@ -57,12 +57,9 @@ The dictionary of dictionaries object is now complete. Let's create an undirecte
 g = nx.from_dict_of_dicts(dod)
 {% endhighlight %}
 
+Your first instinct as a data scientist may be to plot the network graph we created. I would strongly advise you to restrain yourself from doing this initially for network graph analysis unless you enjoy looking at something resembling a ball of spaghetti. Rather, you should look at some other plots to give you a sense of the type of beast you'll be dealing with. First, go ahead and plot the degree distribution of the nodes. This should give you a sense of whether or not some edges may be filtered out. Often times in network graph problems there are a lot of spurious edges that can safely be removed. In this case the degree of a node is the number of unique teams played throughout the regular season.  
+![Degree distribution of NCAA basketball teams.](/assets/bball_schedule_degree_distribution.png)
+Looks like most teams play some 21 unique opponents on average. The degree distribution is neither exponentially distributed nor is it normally distributed. For an epic read on degree distributions in huge networks you should check out the book Linked by Albert-laszlo Barabasi. Don't be intimidated by the author's double-pronged name, it's a popular science book like Stephen Hawking's The Universe in a Nutshell!  
 
 
-
-
-
-
-I would recommend not starting out by plotting all the nodes and edges in your data set because most often you'll just get a ball of spaghetti to look at.  
-
-![Ego-centric graphs of 10 random NCAA basketball teams.](/assets/ego_centric_network_sample.png)
+<!-- ![Ego-centric graphs of 10 random NCAA basketball teams.](/assets/ego_centric_network_sample.png) -->
