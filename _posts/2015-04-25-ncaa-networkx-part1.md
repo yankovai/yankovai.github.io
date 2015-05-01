@@ -57,9 +57,24 @@ The dictionary of dictionaries object is now complete. Let's create an undirecte
 g = nx.from_dict_of_dicts(dod)
 {% endhighlight %}
 
-Your first instinct as a data scientist may be to plot the network graph we created. I would strongly advise you to restrain yourself from doing this initially for network graph analysis unless you enjoy looking at something resembling a ball of spaghetti. Rather, you should look at some other plots to give you a sense of the type of beast you'll be dealing with. First, go ahead and plot the degree distribution of the nodes. This should give you a sense of whether or not some edges may be filtered out. Often times in network graph problems there are a lot of spurious edges that can safely be removed. In this case the degree of a node is the number of unique teams played throughout the regular season.  
+Your first instinct as a data scientist may be to plot the network graph we created. I would strongly advise you to restrain yourself from doing this initially for network graph analysis unless you enjoy looking at something resembling a ball of spaghetti. Rather, you should look at some other plots to give you a sense of the type of beast you'll be dealing with. First, go ahead and plot the degree distribution of the nodes. This should give you a sense of whether or not some edges may be filtered out. Often times in network graph problems there are a lot of spurious edges that can safely be removed. In this case the degree of a node is the number of unique teams played throughout the regular season. 
+{% highlight python %}   
+plt.hist(nx.degree(g).values(), bins=30, range=(0, 30), color='DodgerBlue', histtype='stepfilled', normed=True)
+kde = gaussian_kde(nx.degree(g).values())
+kde_x = np.linspace(0, 30, 500)
+kde_y = kde.evaluate(kde_x)
+plt.plot(kde_x, kde_y)
+plt.xlabel('Node Degree')
+plt.ylabel('Normalized Occurences')
+{% endhighlight %} 
 ![Degree distribution of NCAA basketball teams.](/assets/bball_schedule_degree_distribution.png)
-Looks like most teams play some 21 unique opponents on average. The degree distribution is neither exponentially distributed nor is it normally distributed. For an epic read on degree distributions in huge networks you should check out the book Linked by Albert-laszlo Barabasi. Don't be intimidated by the author's double-pronged name, it's a popular science book like Stephen Hawking's The Universe in a Nutshell!  
+Looks like most teams play some 21 unique opponents on average. The degree distribution is neither exponentially distributed nor is it normally distributed. For an epic read on degree distributions in huge networks you should check out the book Linked by Albert-laszlo Barabasi. The topic might sound really boring but this book will blow your mind. Don't be intimidated by the author's double-pronged name, it's a popular science book much like Stephen Hawking's The Universe in a Nutshell!
+
+Another thing to look at is at the distribution of densities for each team's egocentric network. An egocentric network for some team just takes all of the team's opponents and  edge existing between the nodes. For example, here's Michigan's egocentric graph: 
+![Michigan's egocentric graph](michigan_egocentric_graph.png)
+The density of an egocentric graph gauges how closely clustered everyone in the group is. A density of one here means that every team Michigan played during the regular season also played each other. More gerneally, the density is defined as the number of edges between a group of nodes divided by the number of possible edges between all nodes in the group. The total number of possible edges between $n$ nodes is $\large{ n\choose 2}$ which simplifies to $\large{\frac{n(n-1)}{2}}$.
+
+
 
 
 <!-- ![Ego-centric graphs of 10 random NCAA basketball teams.](/assets/ego_centric_network_sample.png) -->
