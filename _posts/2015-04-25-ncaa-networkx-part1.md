@@ -70,10 +70,23 @@ plt.ylabel('Normalized Occurences')
 ![Degree distribution of NCAA basketball teams.](/assets/bball_schedule_degree_distribution.png)
 Looks like most teams play some 21 unique opponents on average. The degree distribution is neither exponentially distributed nor is it normally distributed. For an epic read on degree distributions in huge networks you should check out the book Linked by Albert-laszlo Barabasi. The topic might sound really boring but this book will blow your mind. Don't be intimidated by the author's double-pronged name, it's a popular science book much like Stephen Hawking's The Universe in a Nutshell!
 
-Another thing to look at is at the distribution of densities for each team's egocentric network. An egocentric network for some team just takes all of the team's opponents and  edge existing between the nodes. For example, here's Michigan's egocentric graph: 
-![Michigan's egocentric graph](michigan_egocentric_graph.png)
-The density of an egocentric graph gauges how closely clustered everyone in the group is. A density of one here means that every team Michigan played during the regular season also played each other. More gerneally, the density is defined as the number of edges between a group of nodes divided by the number of possible edges between all nodes in the group. The total number of possible edges between $n$ nodes is $\large{ n\choose 2}$ which simplifies to $\large{\frac{n(n-1)}{2}}$.
-
+Another thing to look at is the distribution of densities for each team's egocentric network. An egocentric network for some team just takes all of the team's opponents and  edges existing between the nodes. For example, here's Michigan's egocentric graph: 
+![Michigan's egocentric graph](/assets/michigan_egocentric_graph.png)
+The density of an egocentric graph gauges how closely clustered everyone in the group is. A density of one here means that every team Michigan played during the regular season also played each other. More gerneally, the density is defined as the number of edges between a group of nodes divided by the number of possible edges between all nodes in the group. The total number of possible edges between n nodes is Choose(n, 2) which simplifies to (n)(n-1)/2.
+{% highlight python %} 
+# Total number of edges
+m = len(g.edges())
+# Total number of nodes
+n = len(g.nodes())
+# Graph density
+2.*m/(n*(n - 1.))
+# >> 0.061391941391941394
+{% endhighlight %}
+If you don't believe me, NetworkX has a function to calculate the density for you:
+{% highlight python %} 
+nx.density(g)
+# >> 0.061391941391941394
+{% endhighlight %}
 
 
 
