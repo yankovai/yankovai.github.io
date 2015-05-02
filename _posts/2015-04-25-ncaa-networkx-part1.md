@@ -88,6 +88,61 @@ nx.density(g)
 # >> 0.061391941391941394
 {% endhighlight %}
 
+We calculate the density of each team's egocentric graph.
+{% highlight python %} 
+team_ego_graph_densities = dict()
+for team in g.nodes_iter():
+    g_team = nx.ego_graph(g, team, undirected=True)
+    team_ego_graph_densities[team] = nx.density(g_team)
+{% endhighlight %}
+Then, we plot the histogram.
+{% highlight python %} 
+plt.hist(team_ego_graph_densities.values(), bins=22, histtype='stepfilled', normed=True, color='DodgerBlue')
+kde = gaussian_kde(team_ego_graph_densities.values())
+kde_x = np.linspace(0, .6, 500)
+kde_y = kde.evaluate(kde_x)
+plt.plot(kde_x, kde_y)
+plt.xlabel('Team Ego-Centric Graph Density')
+plt.ylabel('Normalized Occurences')
+{% endhighlight %}
+![Distribution of all teams' egocentric densities](/assets/bball_schedule_density_distribution.png)
+The average density of a team's egocentric graph hovers around 0.35 which is substantially higher than the density of the entire graph. Consequently, we have some reason to believe there may exist some clustering in our network. The graph is not random. In other words, there should be families of teams that play each other. To see if this is true we can look at the egocentric graphs of say ten different teams to see what they look like. To have some of the graph characteristics better jump out at you, we can set the node size to be proportional to the node degree and the edge thickness to be proportional to the weight between nodes. 
+{% highlight python %}  
+# Pick 10 random teams to plot
+ego_teams = np.random.choice(g.nodes(), size=10, replace=False)
 
+for plot_num, ego_team in zip(xrange(1, 10 + 1), ego_teams):
+    # Initialize plot
+    ax = plt.subplot(5, 2, plot_num)
+    ax.axis('off')
+    plt.tight_layout()
+    plt.title(ego_team, fontdict={'fontsize': 18})
+    
+    # Create egocentric network
+    g_team = nx.ego_graph(g, ego_team, undirected=True)
+    pos = nx.spring_layout(g_team)
 
-<!-- ![Ego-centric graphs of 10 random NCAA basketball teams.](/assets/ego_centric_network_sample.png) -->
+    # Node size
+    node_size = np.array(nx.degree(g_team).values())
+    node_size = 300.*node_size/node_size.mean()
+    nx.draw_networkx_nodes(g_team, pos=pos, node_color='DodgerBlue', node_size=node_size, alpha=1.)
+
+    # Draw edges
+    unique_edge_weights = dict()
+    for u, v, d in g_team.edges_iter(data=True):
+        try:
+            d = d['weight']
+            unique_edge_weights[d].append((u, v))
+        except KeyError:
+            unique_edge_weights.setdefault(d, [(u, v)])
+
+    for edge_weight in unique_edge_weights.keys():
+        nx.draw_networkx_edges(g_team, pos=pos, alpha=0.2, edgelist=unique_edge_weights[edge_weight], width=edge_weight)
+
+    # Draw labels 
+    labels = {team: team for team in g_team.nodes_iter()}
+    nx.draw_networkx_labels(g_team, pos=pos, labels=labels, font_weight='bold')
+{% endhighlight %}
+![Ego-centric graphs of 10 random NCAA basketball teams.](/assets/ego_centric_network_sample.png)
+In each team's egocentric graph we always see a tightly wound cluster of some ten teams. This spaghetti ball forms what's called a clique, where all teams in the ball have played each other at least once. We also see in the egocentric graphs that there are always a few straggler nodes.
+
